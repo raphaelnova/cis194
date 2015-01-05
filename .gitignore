@@ -1,0 +1,7 @@
+dist/
+.cabal-sandbox/
+cabal.sandbox.config
+
+# I'm too lazy to call ./dist/build/spec/spec so I symlink it instead
+spec
+
