@@ -33,4 +33,14 @@ specs = do
                 doubleEveryOther       [e, o] ==         [2*e, o] &&
                 doubleEveryOther    [o, e, o] ==      [o, 2*e, o] &&
                 doubleEveryOther [e, o, e, o] == [2*e, o, 2*e, o]
+    describe "Week 1 - Ex. 3" $ do
+        describe "sumDigits" $ do
+            it "sums the digits and not the numbers" $ do
+                sumDigits [16,7,12,5]  `shouldBe` 22 -- according to the example
+                sumDigits [16,7,112,5] `shouldBe` 23
+    describe "Week 1 - Ex. 4" $ do
+        describe "validate" $ do
+            it "properly validates credit card numbers" $ do
+                validate 4012888888881881 `shouldBe` True
+                validate 4012888888881882 `shouldBe` False
 
