@@ -1,6 +1,7 @@
 module Week2.LogAnalysis where
 
 import Data.Char (isSpace)
+import Data.List (foldl')
 import Data.Maybe (fromMaybe, listToMaybe)
 
 import Week2.Log
@@ -39,4 +40,13 @@ insert msg@(LogMessage _ time _) (Node left root@(LogMessage _ rTime _) right)
     | otherwise    = Node left root (insert msg right)
 -- you happy compiler?
 insert _ (Node _ (Unknown _) _) = error "The tree shouldn't contain Unknown records"
+
+-- Ex. 3
+build :: [LogMessage] -> MessageTree
+build = foldl' (flip insert) Leaf
+
+-- Ex. 4
+inOrder :: MessageTree -> [LogMessage]
+inOrder Leaf = []
+inOrder (Node left root right) = inOrder left ++ [root] ++ inOrder right
 
