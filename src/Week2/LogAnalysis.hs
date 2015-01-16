@@ -30,3 +30,13 @@ parseMessage line = case line of
 parse :: String -> [LogMessage]
 parse = map parseMessage . lines
 
+-- Ex. 2
+insert :: LogMessage -> MessageTree -> MessageTree
+insert (Unknown _) tree = tree
+insert msg@(LogMessage _ _ _) Leaf = Node Leaf msg Leaf
+insert msg@(LogMessage _ time _) (Node left root@(LogMessage _ rTime _) right)
+    | time < rTime = Node (insert msg left) root right
+    | otherwise    = Node left root (insert msg right)
+-- you happy compiler?
+insert _ (Node _ (Unknown _) _) = error "The tree shouldn't contain Unknown records"
+
