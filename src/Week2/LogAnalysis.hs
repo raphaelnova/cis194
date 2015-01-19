@@ -50,3 +50,12 @@ inOrder :: MessageTree -> [LogMessage]
 inOrder Leaf = []
 inOrder (Node left root right) = inOrder left ++ [root] ++ inOrder right
 
+-- Ex. 5
+whatWentWrong :: [LogMessage] -> [String]
+whatWentWrong = map getMsg . inOrder . build . filter (isSevereError)
+  where
+    getMsg (LogMessage _ _ msg) = msg
+    getMsg _ = "" -- for the Unknown case again
+    isSevereError (LogMessage (Error sev) _ _) = sev >= 50
+    isSevereError _ = False
+

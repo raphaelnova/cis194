@@ -44,4 +44,17 @@ ex1 = do
                   `shouldBe` Node (Node Leaf m1 Leaf) m2 Leaf
                 insert m2 (Node Leaf m1 Leaf)
                   `shouldBe` Node Leaf m1 (Node Leaf m2 Leaf)
+    describe "Week 2 - Ex. 5" $ do
+        describe "whatWentWrong" $ do
+            let logs = [ LogMessage Info 1 "Info"
+                       , LogMessage Warning 2 "Warn"
+                       , LogMessage (Error 10) 0 "Low sev error"
+                       , LogMessage (Error 60) 9 "Second high sev error"
+                       , LogMessage (Error 50) 5 "First high sev error"
+                       ]
+            it "filters log entries by type and size" $ do
+                length (whatWentWrong logs) `shouldBe` 2
+            it "orders log entries by timestamp" $ do
+                whatWentWrong logs `shouldBe` [ "First high sev error"
+                                              , "Second high sev error" ]
 
